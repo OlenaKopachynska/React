@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Post from '../post/Post';
+import {styles} from '../post/styles'
 
 class AllPosts extends Component {
 
@@ -7,13 +8,12 @@ class AllPosts extends Component {
 
 
     selectPost = (id) => {
-        let {posts} = this.state;
-        let find = posts.find(value => value.id === id);
-        this.setState({selected: find});
+        this.setState({selected: this.state.posts.find(value => value.id === id)});
     }
 
     render() {
         let {posts, selected} = this.state;
+
 
         return (
 
@@ -21,15 +21,15 @@ class AllPosts extends Component {
             <div>
 
                 {
-                    posts.map(post => <Post item={post} key={post.id} selectPost={this.selectPost}/>)
+                    posts.map(post => <Post item={post} key={post.id} selectPost={this.selectPost} isShowButton={true}/>)
                 }
                 {
-                    selected && <Post item={selected}/>
+                    selected && <h2 style={styles.selected}><Post item={selected} isShowButton={false}/></h2>
                 }
                 
             </div>
         );
-    }
+    };
 
     componentDidMount() {
 
